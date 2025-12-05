@@ -1,5 +1,0 @@
-export { GalleryShowcase } from './gallery-showcase/gallery-showcase'
-export { GalleryImageList } from './gallery-showcase/gallery-image-list/gallery-image-list'
-export { ImagePreview } from './gallery-showcase/image-preview/image-preview'
-export { Controls } from './gallery-showcase/image-preview/controls'
-export { Header } from './header/header'
