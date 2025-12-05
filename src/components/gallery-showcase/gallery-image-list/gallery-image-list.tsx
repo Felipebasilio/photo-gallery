@@ -1,13 +1,39 @@
-import type { Image } from "../../../types/image";
+import type { Image } from '../../../types/image'
 
-export const GalleryImageList = ({ images }: { images: Image[] }) => {
+interface GalleryImageListProps {
+  images: Image[]
+  selectedImage: Image | null
+  onSelectImage: (image: Image) => void
+}
+
+export function GalleryImageList({ images, selectedImage, onSelectImage }: GalleryImageListProps) {
   return (
-    <div className="h-full w-full grid-cols-5 gap-2 grid-auto-rows-fr overflow-auto max-h-[400px]">
-      {images.map((image: Image) => (
-        <div key={image.id}>
-          <img src={image.download_url} alt={image.author} className="w-full h-auto" />
-        </div>
-      ))}
+    <div className="grid grid-cols-3 gap-2">
+      {images.map((image) => {
+        const isSelected = selectedImage?.id === image.id
+        
+        return (
+          <button
+            key={image.id}
+            onClick={() => onSelectImage(image)}
+            className={`
+              relative overflow-hidden rounded-lg cursor-pointer
+              transition-all duration-200 hover:scale-105
+              ${isSelected ? 'ring-3 ring-blue-500 ring-offset-2 ring-offset-gray-900' : ''}
+            `}
+          >
+            <img
+              src={image.download_url}
+              alt={`Photo by ${image.author}`}
+              className="w-full aspect-square object-cover"
+              loading="lazy"
+            />
+            {isSelected && (
+              <div className="absolute inset-0 bg-blue-500/20" />
+            )}
+          </button>
+        )
+      })}
     </div>
-  );
-};
+  )
+}

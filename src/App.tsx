@@ -1,28 +1,20 @@
 import './App.css'
 import { GalleryShowcase, Header } from './components'
-import {
-  QueryClientProvider,
-  QueryClient
-} from '@tanstack/react-query'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+
+// QueryClient should be created outside the component to avoid recreation on re-renders
+const queryClient = new QueryClient()
 
 function App() {
-  const queryClient = new QueryClient()
-
   return (
-        <QueryClientProvider client={queryClient}>
-
-      <div className='flex flex-col justify-center items-center gap-10 h-full'>
-        {/* Header Container */}
-        <div className='w-full'>
-          <Header />
-        </div>
-
-        {/* Gallery Showcase Container */}
-        <div className='w-full flex justify-center items-center grow shrink basis-full'>
+    <QueryClientProvider client={queryClient}>
+      <div className="flex flex-col h-full">
+        <Header />
+        <main className="flex-1 overflow-hidden">
           <GalleryShowcase />
-        </div>
+        </main>
       </div>
-        </QueryClientProvider>
+    </QueryClientProvider>
   )
 }
 
