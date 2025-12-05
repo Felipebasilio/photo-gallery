@@ -1,9 +1,16 @@
 import './App.css'
 import { GalleryShowcase, Header } from './components'
+import {
+  QueryClientProvider,
+  QueryClient
+} from '@tanstack/react-query'
 
 function App() {
+  const queryClient = new QueryClient()
+
   return (
-    <>
+        <QueryClientProvider client={queryClient}>
+
       <div className='flex flex-col justify-center items-center gap-10 h-full'>
         {/* Header Container */}
         <div className='w-full'>
@@ -15,7 +22,7 @@ function App() {
           <GalleryShowcase />
         </div>
       </div>
-    </>
+        </QueryClientProvider>
   )
 }
 
